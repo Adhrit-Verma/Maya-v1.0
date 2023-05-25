@@ -63,6 +63,11 @@ echo AAAA      AAAA  DDDDDDDDDDDDD    AAAA      AAAA
 echo AAAA      AAAA  DDDDDDDDDDDD     AAAA      AAAA
 echo --------------------------------------------------
 
+setlocal enabledelayedexpansion
+set counter=0
+set timeout_duration=8
+
+
 :loop
 ping localhost -n 1 >nul
 cls
@@ -122,4 +127,14 @@ echo AAAA      AAAA  DDDD      DDDD   AAAA      AAAA          OO
 echo AAAA      AAAA  DDDDDDDDDDDDD    AAAA      AAAA         OO
 echo AAAA      AAAA  DDDDDDDDDDDD     AAAA      AAAA       OO
 echo --------------------------------------------------
+timeout /t 1 >nul
+set /A counter+=1
+
+if !counter! equ 8 (
+    goto terminate
+)
+
 goto loop
+
+:terminate
+exit

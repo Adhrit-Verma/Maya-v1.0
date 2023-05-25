@@ -54,23 +54,11 @@ class handler:
     def load_cNd(self):
         current_path = os.path.abspath(sys.argv[0])
         self.drive = os.path.splitdrive(current_path)[0]
-        self.cmds=(f"{self.drive}/A.D.A/A.D.A/loadup/wake/art.bat","")
+        self.cmds=f"{self.drive}/A.D.A/A.D.A/loadup/wake/art.bat"
         self.execute()
 
     def execute(self):
-        timeout_sec=10
-        t=time.time()
-        print(t)
-        for item in self.cmds:
-            (c)=item
-            if "art.bat" in c:
-                t=t-time.time()
-                if t>=timeout_sec:
-                    self.open_file(f"{self.drive}/A.D.A/A.D.A/loadup/wake/terminate.bat")
-                    break
-                else:
-                    self.open_file(c)
-            else:
-                break
+        if "art.bat" in self.cmds:
+            self.open_file(self.cmds)
 
 control=handler()
