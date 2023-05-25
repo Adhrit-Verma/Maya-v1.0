@@ -12,15 +12,21 @@ class Engine:
         self.trigger_name = 'maya'
 
     def talk(self, text):
-        tts = gTTS(text=text, lang='en')
-        tts.save('speech.mp3')
-        playsound('speech.mp3')
+        try:
+            tts = gTTS(text=text, lang='en')
+            tts.save('speech.mp3')
+            playsound('speech.mp3')
+        except Exception as e:
+            print(f"Error: {e}")
 
     def set_microphone_threshold(self):
-        with sr.Microphone() as mic:
-            print('\nCalibrating microphone sensitivity...')
-            self.ear.adjust_for_ambient_noise(mic, duration=1)
-            print('Microphone sensitivity calibrated.')
+        try:
+            with sr.Microphone() as mic:
+                print('\nCalibrating microphone sensitivity...')
+                self.ear.adjust_for_ambient_noise(mic, duration=1)
+                print('Microphone sensitivity calibrated.')
+        except Exception as e:
+            print(f"Error: {e}")
 
     def take_command(self):
         try:
@@ -31,9 +37,13 @@ class Engine:
                 command = self.ear.recognize_google(voice)
                 command = command.lower()
                 return command
+        except sr.RequestError:
+            print("Google Speech Recognition service is unavailable.")
+        except sr.UnknownValueError:
+            print("Unable to understand audio.")
         except Exception as e:
             print(f"Error: {e}")
-            return ''  # Return an empty string if an error occurs
+        return ''
 
     def process_command(self, command):
         if re.search(r'\b' + self.trigger_name + r'\b', command):
