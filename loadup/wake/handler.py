@@ -22,6 +22,21 @@ class handler:
 
         self.load_cNd()
 
+    """def temp_path(self):
+        current_path = os.path.abspath(sys.argv[0])
+        drive = os.path.splitdrive(current_path)[0]
+        bat_content=f'''
+        @echo off
+        pause
+        setx PATH "%PATH%;{drive}\A.D.A\A.D.A"
+        pause
+        handler.py
+        '''
+        bat_file_path = rf'{drive}\A.D.A\A.D.A\loadup\wake\set.bat'
+        self.write_bat_file(bat_file_path, bat_content)
+        self.open_file(bat_file_path)"""
+
+
     def write_bat_file(self,file_path, content):
         with open(file_path, 'w') as file:
             file.write(content)
@@ -38,38 +53,24 @@ class handler:
     
     def load_cNd(self):
         current_path = os.path.abspath(sys.argv[0])
-        drive = os.path.splitdrive(current_path)[0]
-        #print(drive)
-        bat_content=f'''
-        @echo off
-        cd {drive}\A.D.A\A.D.A\loadup\wake
-        ping localhost -n 2 >nul
-        exit /b
-        '''
-        bat_file_path = rf'{drive}\A.D.A\A.D.A\loadup\wake\path.bat'
-
-
-        self.write_bat_file(bat_file_path, bat_content)
-        self.open_file(bat_file_path)
-        self.cmds=("","")
-        #print(self.cmds)
+        self.drive = os.path.splitdrive(current_path)[0]
+        self.cmds=(f"{self.drive}/A.D.A/A.D.A/loadup/wake/art.bat","")
         self.execute()
 
     def execute(self):
-        timeout_sec=5
-        start_time=time.time()
-        print(start_time)
+        timeout_sec=10
+        t=time.time()
+        print(t)
         for item in self.cmds:
             (c)=item
             if "art.bat" in c:
-                while True:
-                    if time.time() - start_time >= timeout_sec:
-                        os.system("start terminate.bat")
-                        break
-                    else:
-                        os.system(f"{c}")
+                t=t-time.time()
+                if t>=timeout_sec:
+                    self.open_file(f"{self.drive}/A.D.A/A.D.A/loadup/wake/terminate.bat")
+                    break
+                else:
+                    self.open_file(c)
             else:
-                pass
-            os.system(f"{c}")
+                break
 
 control=handler()
