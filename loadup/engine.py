@@ -2,6 +2,7 @@ import speech_recognition as sr
 import pywhatkit
 import threading
 import re
+import os
 from gtts import gTTS
 from playsound import playsound
 
@@ -76,9 +77,10 @@ class Engine:
 
     def talk(self, text):
         try:
+            path = os.path.join("A.D.A", "speech.mp3")
             tts = gTTS(text=text, lang='en')
-            tts.save('speech.mp3')
-            playsound('speech.mp3')
+            tts.save(path)
+            playsound(path)
         except Exception as e:
             print(f"Error: {e}")
 
