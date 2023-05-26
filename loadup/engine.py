@@ -78,9 +78,12 @@ class Engine:
     def talk(self, text):
         try:
             path = os.path.join("A.D.A", "speech.mp3")
+            path = path.replace("\\", "/")
+            
             tts = gTTS(text=text, lang='en')
             tts.save(path)
-            playsound(path)
+
+            playsound(path, block=False)
         except Exception as e:
             print(f"Error: {e}")
 
