@@ -1,5 +1,4 @@
 import os
-import time
 import sys
 import subprocess
 
@@ -21,21 +20,6 @@ class handler:
         self.open_file(bat_file_path)
 
         self.load_cNd()
-
-    """def temp_path(self):
-        current_path = os.path.abspath(sys.argv[0])
-        drive = os.path.splitdrive(current_path)[0]
-        bat_content=f'''
-        @echo off
-        pause
-        setx PATH "%PATH%;{drive}\A.D.A\A.D.A"
-        pause
-        handler.py
-        '''
-        bat_file_path = rf'{drive}\A.D.A\A.D.A\loadup\wake\set.bat'
-        self.write_bat_file(bat_file_path, bat_content)
-        self.open_file(bat_file_path)"""
-
 
     def write_bat_file(self,file_path, content):
         with open(file_path, 'w') as file:

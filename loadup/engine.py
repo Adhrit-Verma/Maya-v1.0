@@ -3,6 +3,7 @@ import pywhatkit
 import threading
 import re
 import os
+import uuid
 from gtts import gTTS
 from playsound import playsound
 
@@ -77,9 +78,10 @@ class Engine:
 
     def talk(self, text):
         try:
-            path = os.path.join("A.D.A", "speech.mp3")
+            filename = f"speech_{uuid.uuid4().hex}.mp3"  # Generate a unique filename
+            path = os.path.join("A.D.A", filename)
             path = path.replace("\\", "/")
-            
+
             tts = gTTS(text=text, lang='en')
             tts.save(path)
 
