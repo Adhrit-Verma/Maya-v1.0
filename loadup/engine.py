@@ -26,12 +26,16 @@ class CommandProcessor:
     def talk(self, text):
         try:
             engine = pyttsx3.init()
-            engine.setProperty('rate', 140)  # Adjust the speech rate as needed
+            voice_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0'
+            engine.setProperty('voice', voice_id)
+            
+            engine.setProperty('rate', 170)  # Adjust the speech rate as needed
             engine.setProperty('volume', 1.0)  # Adjust the volume as needed
             engine.say(text)
             engine.runAndWait()
         except Exception as e:
             print(f"Error: {e}")
+
 
 
 class Engine:
@@ -80,7 +84,7 @@ class Engine:
     def talk(self, text):
         try:
             engine = pyttsx3.init()
-            engine.setProperty('rate', 140)  # Adjust the speech rate as needed
+            engine.setProperty('rate', 170)  # Adjust the speech rate as needed
             engine.setProperty('volume', 1.0)  # Adjust the volume as needed
             engine.say(text)
             engine.runAndWait()
