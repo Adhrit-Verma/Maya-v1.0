@@ -2,8 +2,6 @@ import speech_recognition as sr
 import pywhatkit
 import threading
 import re
-import os
-import uuid
 import pyttsx3
 
 class CommandProcessor:
@@ -29,8 +27,8 @@ class CommandProcessor:
             voice_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0'
             engine.setProperty('voice', voice_id)
             
-            engine.setProperty('rate', 170)  # Adjust the speech rate as needed
-            engine.setProperty('volume', 1.0)  # Adjust the volume as needed
+            engine.setProperty('rate', 170)
+            engine.setProperty('volume', 1.0)
             engine.say(text)
             engine.runAndWait()
         except Exception as e:
@@ -84,7 +82,7 @@ class Engine:
     def talk(self, text):
         try:
             engine = pyttsx3.init()
-            engine.setProperty('rate', 170)  # Adjust the speech rate as needed
+            engine.setProperty('rate', 150)  # Adjust the speech rate as needed
             engine.setProperty('volume', 1.0)  # Adjust the volume as needed
             engine.say(text)
             engine.runAndWait()
