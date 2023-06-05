@@ -8,7 +8,7 @@ This full form suggests that the assistant is autonomous and can provide digital
 
 In this ***Commit*** at 15:51 PM changes made are :
 
-**Code Modification:**
+**##Code Modification:**
 
 The code has been modified to include additional functionality for gathering system information.
 A new class called SystemInfoGatherer has been created to encapsulate the logic for gathering system information.
@@ -17,14 +17,14 @@ The gathered information is stored in a dictionary called system_info which is t
 The JSON file is saved in a specific directory based on the provided drive path.
 The class also includes methods to check internet connection and microphone availability.
 
-**Connection between Files:**
+**##Connection between Files:**
 
 The code for gathering system information has been moved to a separate file named system_info_gatherer.py.
 The present_data() function in the original code has been modified to import the SystemInfoGatherer class from the system_info_gatherer.py file.
 The present_data() function now calls the gather_system_info() method of the SystemInfoGatherer class to gather system information and generate the system_info.json file.
 The remaining part of the code in present_data() is responsible for reading and presenting the data from the system_info.json file.
 
-**Additional Features:**
+**##Additional Features:**
 
 The code has been enhanced to determine the type of device it is (PC, Laptop, or Unknown) based on the machine type using the platform.machine() method.
 The device type information is stored in the device_info dictionary along with the device category (PC, Laptop, or Unknown).
