@@ -2,10 +2,7 @@ import speech_recognition as sr
 import pywhatkit
 import threading
 import re
-import os
-import uuid
-from gtts import gTTS
-from playsound import playsound
+import pyttsx3
 
 class CommandProcessor:
     def __init__(self, trigger_name):
@@ -26,9 +23,14 @@ class CommandProcessor:
 
     def talk(self, text):
         try:
-            tts = gTTS(text=text, lang='en')
-            tts.save('speech.mp3')
-            playsound('speech.mp3')
+            engine = pyttsx3.init()
+            voice_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0'
+            engine.setProperty('voice', voice_id)
+            
+            engine.setProperty('rate', 170)
+            engine.setProperty('volume', 1.0)
+            engine.say(text)
+            engine.runAndWait()
         except Exception as e:
             print(f"Error: {e}")
 
@@ -78,16 +80,14 @@ class Engine:
 
     def talk(self, text):
         try:
-            filename = f"speech_{uuid.uuid4().hex}.mp3"  # Generate a unique filename
-            path = os.path.join("A.D.A", filename)
-            path = path.replace("\\", "/")
-
-            tts = gTTS(text=text, lang='en')
-            tts.save(path)
-
-            playsound(path, block=False)
+            engine = pyttsx3.init()
+            engine.setProperty('rate', 150)  # Adjust the speech rate as needed
+            engine.setProperty('volume', 1.0)  # Adjust the volume as needed
+            engine.say(text)
+            engine.runAndWait()
         except Exception as e:
             print(f"Error: {e}")
+
 
 
 engine = Engine(trigger_name='maya')
