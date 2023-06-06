@@ -124,7 +124,6 @@ class handler:
         '''
         bat_file_path = rf'{drive}\A.D.A\A.D.A\loadup\wake\privilege.bat'
         self.write_bat_file(bat_file_path, bat_content)
-        self.Run_file(bat_file_path)
 
         self.load_cNd()
 
