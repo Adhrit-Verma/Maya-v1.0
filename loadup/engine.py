@@ -3,6 +3,7 @@ import pywhatkit
 import threading
 import re
 import pyttsx3
+from modules.web import web
 
 class CommandProcessor:
     def __init__(self, trigger_name):
@@ -52,6 +53,7 @@ class Engine:
     def take_command(self):
         try:
             with sr.Microphone() as mic:
+                print("Listening..👂\n")
                 self.ear.dynamic_energy_adjustment_ratio = 1.7  # Adjust this ratio to control dynamic energy adjustment
                 voice = self.ear.listen(mic)
                 command = self.ear.recognize_google(voice)

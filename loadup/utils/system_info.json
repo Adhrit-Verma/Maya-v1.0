@@ -1,0 +1,35 @@
+{
+    "os_name": "Windows",
+    "os_version": "10",
+    "hostname": "Jimmy",
+    "cpu_info": {
+        "cpu_count": 6,
+        "cpu_threads": 12,
+        "cpu_usage": 2.3
+    },
+    "memory_info": {
+        "total_memory(MB)": 16315,
+        "available_memory(MB)": 11280
+    },
+    "disk_info": {
+        "total_space(MB)": 389999,
+        "free_space(MB)": 279621
+    },
+    "drive_info": {
+        "num_drives": 3
+    },
+    "pc_location": {
+        "latitude": 24.9425,
+        "longitude": 84.8427
+    },
+    "internet_info": {
+        "is_connected": true
+    },
+    "device_info": {
+        "device_type": "AMD64",
+        "device_category": "PC"
+    },
+    "mic_info": {
+        "is_available": true
+    }
+}
