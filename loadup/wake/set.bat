@@ -1,6 +1,5 @@
-
-        @echo off
-        pause
-        setx PATH "%PATH%;e:\A.D.A\A.D.A\loadup"
-        py handler.py
+@echo off
+pause
+setx PATH "%PATH%;%~dp0"
+py %~dp0handler.py
         

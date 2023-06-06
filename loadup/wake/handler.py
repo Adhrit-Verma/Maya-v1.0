@@ -119,12 +119,12 @@ class handler:
         echo Requesting administrator privileges...
         echo.
         :: Run Python script with elevated privileges
-        powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/c python script.py'"
+        powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/c py "%~dp0..\engine.py"'"
 
         '''
         bat_file_path = rf'{drive}\A.D.A\A.D.A\loadup\wake\privilege.bat'
         self.write_bat_file(bat_file_path, bat_content)
-        self.open_file(bat_file_path)
+        self.Run_file(bat_file_path)
 
         self.load_cNd()
 
@@ -132,7 +132,7 @@ class handler:
         with open(file_path, 'w') as file:
             file.write(content)
 
-    def open_file(self, file_path):
+    def Run_file(self, file_path):
         try:
             subprocess.run(file_path, shell=True)
         except subprocess.CalledProcessError as e:
@@ -161,8 +161,10 @@ class handler:
         drive = os.path.splitdrive(current_path)[0]
 
         cmds = f"{drive}/A.D.A/A.D.A/loadup/wake/art.bat"
-        if "art.bat" in cmds:
-            self.open_file(cmds)
+        self.Run_file(cmds)
+        cmds = f"{drive}/A.D.A/A.D.A/loadup/wake/privilege.bat"
+        self.Run_file(cmds)
+        
         
 
 
