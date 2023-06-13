@@ -13,21 +13,8 @@ class CommandProcessor:
     def process_command(self, command):
         if re.search(r'\b' + self.trigger_name + r'\b', command):
             command = re.sub(r'\b' + self.trigger_name + r'\b', '', command)
-            response = web.WebClass(command)
+            response = web.CommandWeb(command)
             self.talk(response) 
-
-    '''def process_command(self, command):
-        if re.search(r'\b' + self.trigger_name + r'\b', command):
-            command = re.sub(r'\b' + self.trigger_name + r'\b', '', command)
-            if 'play' in command:
-                command = command.replace('play', 'playing')
-                song = command + ''
-                self.talk(song)
-                pywhatkit.playonyt(song)
-            elif 'who are you' in command:
-                response = 'Hey! My name is Maya. I am an Artificial Intelligence designed by Kafy Dier aka Adhrit Verma. ' \
-                           'I am the very first build of his 1st generation versions of full-fledged AIs'
-                self.talk(response)'''
 
     def talk(self, text):
         try:
@@ -53,6 +40,8 @@ class Engine:
     def set_microphone_threshold(self):
         try:
             with sr.Microphone() as mic:
+                print("\r" + " " * 50, end="")
+                print("Adjusting microphone for noise,please wait ✋")
                 self.ear.adjust_for_ambient_noise(mic, duration=1)
         except Exception as e:
             print(f"Error: {e}")

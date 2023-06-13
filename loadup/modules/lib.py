@@ -2,7 +2,7 @@ import geocoder
 import json
 import pywhatkit
 
-class WebClass:
+class CommandWeb:
     def __init__(self, command):
         self.command = command
 
@@ -42,8 +42,5 @@ class WebClass:
         except Exception as e:
             return f"Error: {e}"
         
-    def retrieve_weather_info(self, address):
-        # Code to retrieve weather information using the address or location
-        # Replace this with your implementation or use a weather API
         
         return f"Weather information for {address}"
