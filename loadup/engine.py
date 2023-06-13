@@ -53,19 +53,24 @@ class Engine:
     def take_command(self):
         try:
             with sr.Microphone() as mic:
-                print("Listening..👂\n")
+                print("\r" + " " * 50, end="")  
+                print("\rListening...👂", end="")
                 self.ear.dynamic_energy_adjustment_ratio = 1.7  # Adjust this ratio to control dynamic energy adjustment
                 voice = self.ear.listen(mic)
                 command = self.ear.recognize_google(voice)
                 command = command.lower()
                 return command
         except sr.RequestError:
-            print("Google Speech Recognition service is unavailable.")
+            print("\r" + " " * 50, end="")  
+            print("\rGoogle Speech Recognition service is unavailable.")
         except sr.UnknownValueError:
-            print("Unable to understand audio.")
+            print("\r" + " " * 50, end="")  
+            print("\rUnable to understand audio.")
         except Exception as e:
-            print(f"Error: {e}")
+            print("\r" + " " * 50, end="")  
+            print(f"\rError: {e}")
         return ''
+
 
     def listening_loop(self, command_processor):
         while self.is_listening:
