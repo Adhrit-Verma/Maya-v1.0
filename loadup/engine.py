@@ -3,13 +3,20 @@ import pywhatkit
 import threading
 import re
 import pyttsx3
-from modules.web import web
+from modules.lib import web
+
 
 class CommandProcessor:
     def __init__(self, trigger_name):
         self.trigger_name = trigger_name
 
     def process_command(self, command):
+        if re.search(r'\b' + self.trigger_name + r'\b', command):
+            command = re.sub(r'\b' + self.trigger_name + r'\b', '', command)
+            response = web.WebClass(command)
+            self.talk(response) 
+
+    '''def process_command(self, command):
         if re.search(r'\b' + self.trigger_name + r'\b', command):
             command = re.sub(r'\b' + self.trigger_name + r'\b', '', command)
             if 'play' in command:
@@ -20,7 +27,7 @@ class CommandProcessor:
             elif 'who are you' in command:
                 response = 'Hey! My name is Maya. I am an Artificial Intelligence designed by Kafy Dier aka Adhrit Verma. ' \
                            'I am the very first build of his 1st generation versions of full-fledged AIs'
-                self.talk(response)
+                self.talk(response)'''
 
     def talk(self, text):
         try:
