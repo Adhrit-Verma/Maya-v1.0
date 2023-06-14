@@ -1,10 +1,8 @@
 import speech_recognition as sr
-import pywhatkit
 import threading
 import re
 import pyttsx3
-from modules.lib import web
-
+from modules.lib import CommandWeb
 
 class CommandProcessor:
     def __init__(self, trigger_name):
@@ -13,7 +11,7 @@ class CommandProcessor:
     def process_command(self, command):
         if re.search(r'\b' + self.trigger_name + r'\b', command):
             command = re.sub(r'\b' + self.trigger_name + r'\b', '', command)
-            response = web.CommandWeb(command)
+            response = CommandWeb(command).execute_command()
             self.talk(response) 
 
     def talk(self, text):
