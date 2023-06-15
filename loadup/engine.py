@@ -53,15 +53,26 @@ class Engine:
                 print("\rListening...👂", end="")
                 self.play_sound(f"{drive}/A.D.A/A.D.A/loadup/ready_sound.wav")
                 voice = self.ear.listen(mic)
-                command = self.ear.recognize_google(voice)
-                command = command.lower()
-                return command
-        except sr.RequestError:
-            print("\r" + " " * 50, end="")
-            print("\rGoogle Speech Recognition service is unavailable.")
-        except sr.UnknownValueError:
-            print("\r" + " " * 50, end="")
-            print("\rUnable to understand audio.")
+
+                # Perform live speech recognition by every word
+                print("\nRecognizing speech...")
+
+                try:
+                    words = self.ear.recognize_google(voice, show_all=True)
+                    if 'alternative' in words:
+                        alternatives = words['alternative']
+                        for alternative in alternatives:
+                            word = alternative['transcript']
+                            print(f"Recognized: {word}")
+                            command = word.lower()
+                            return command
+                    else:
+                        print("No alternative words found.")
+                except sr.UnknownValueError:
+                    print("Unable to understand speech.")
+                except sr.RequestError as e:
+                    print(f"Error: {e}")
+
         except Exception as e:
             print("\r" + " " * 50, end="")
             print(f"\rError: {e}")

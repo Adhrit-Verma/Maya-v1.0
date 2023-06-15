@@ -1,27 +1,30 @@
-import json,os,sys
+import json
+import os
+import sys
 import requests
 import pywhatkit
+import re
+
 
 class CommandWeb:
     def __init__(self, command):
         self.command = command
 
     def execute_command(self):
-        if 'play' in self.command:
-            self.command = self.command.replace('play', 'playing')
-            song = self.command + ''
+        if re.search(r'\bplay\b', self.command, re.IGNORECASE):
+            song = re.sub(r"\b(play|song)\b", self.command, flags=re.IGNORECASE)
             print(song)
             pywhatkit.playonyt(song)
             return song
-        elif any(keyword in self.command for keyword in ['who are u', 'introduce yourself', 'what are u', 'explain yourself']):
-            response = "Hey! My name is Maya, Version 1.5.0, I am your digital assistant designed to automate and help you in your daily tasks with the help of various Machine Learning models and basic data mining techniques. I am the first of second-generation digital assistants of the Ada Project."
-            return response
-        elif any(keyword in self.command for keyword in ['show weather report', 'what is the weather today', 'what is the sky upto', 'show weather']):
+        elif re.search(r"\b(what|weather)\b", self.command, re.IGNORECASE):
             return self.get_weather_report()
+        elif re.search(r"\b(introduce.*yourself|who.*are.*you|what.*are.*you|explain.*yourself)\b", self.command, re.IGNORECASE):
+            response = "Hey! My name is Maya, Version 1.5.0. I am your digital assistant designed to automate and help you in your daily tasks with the help of various Machine Learning models and basic data mining techniques. I am the first of second-generation digital assistants of the Ada Project."
+            return response
         else:
             return "Sorry, I couldn't understand your command."
 
-    def get_weather_report():
+    def get_weather_report(self):
         # Load system info from the JSON file
         current_path = os.path.abspath(sys.argv[0])
         drive = os.path.splitdrive(current_path)[0]
@@ -48,5 +51,5 @@ class CommandWeb:
 
         # Create the climate report
         report = f"The current weather is {description}. "
-        report += f"The temperature is {temperature}°C, humidity is {humidity}%, and wind speed is {wind_speed} m/s."
+        report += f"The temperature is {temperature}°C, humidity is {humidity}%, and wind speed is {wind_speed} meter per second."
         return report
