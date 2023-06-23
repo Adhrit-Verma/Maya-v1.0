@@ -4,11 +4,13 @@ import sys
 import requests
 import pywhatkit
 import re
+from modules.sys1 import SystemInfo
 
 
 class CommandWeb:
     def __init__(self, command):
         self.command = command
+        self.system_info = SystemInfo()
 
     def execute_command(self):
         if re.search(r'\bplay\b', self.command, re.IGNORECASE):
@@ -23,7 +25,16 @@ class CommandWeb:
             return response
         elif re.search(r"\b(progress|report)\b", self.command, re.IGNORECASE):
             response = "As Maya, your dedicated virtual assistant, I'm excited to share my progress with you! Currently, I can provide real-time weather updates and play music from YouTube for your entertainment. However, I'm continuously evolving to offer even more advanced features and functionalities.In the future, you can expect me to handle file management tasks like clearing junk files, creating folders, and scheduling drive defragmentation on your PC. I'm also expanding my capabilities to include online services such as searching for flights, trains, and buses, finding restaurants and hotels, and providing navigation based on your device's location. Rest assured that I'm committed to becoming your ultimate virtual companion in the A.D.A program. Stay tuned for further updates and enhancements as I strive to make your daily tasks easier and more convenient. Together, we'll achieve great things!" 
-
+            return response
+        elif re.search(r"\b(system|info)\b", self.command, re.IGNORECASE):
+            if re.search(r"\b(device)\b", self.command, re.IGNORECASE):
+                response = self.system_info.get_system_info('device')
+            elif re.search(r"\b(cpu)\b", self.command, re.IGNORECASE):
+                response = self.system_info.get_system_info('cpu')
+            elif re.search(r"\b(memory)\b", self.command, re.IGNORECASE):
+                response = self.system_info.get_system_info('memory')
+            else:
+                response = self.system_info.get_system_info()
             return response
         else:
             return "Sorry, I couldn't understand your command."
