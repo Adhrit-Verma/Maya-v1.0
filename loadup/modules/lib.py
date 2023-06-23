@@ -21,6 +21,10 @@ class CommandWeb:
         elif re.search(r"\b(introduce.*yourself|who.*are.*you|what.*are.*you|explain.*yourself)\b", self.command, re.IGNORECASE):
             response = "Hey! My name is Maya, Version 1.5.0. I am your digital assistant designed to automate and help you in your daily tasks with the help of various Machine Learning models and basic data mining techniques. I am the first of second-generation digital assistants of the Ada Project."
             return response
+        elif re.search(r"\b(progress|report)\b", self.command, re.IGNORECASE):
+            response = "As Maya, your dedicated virtual assistant, I'm excited to share my progress with you! Currently, I can provide real-time weather updates and play music from YouTube for your entertainment. However, I'm continuously evolving to offer even more advanced features and functionalities.In the future, you can expect me to handle file management tasks like clearing junk files, creating folders, and scheduling drive defragmentation on your PC. I'm also expanding my capabilities to include online services such as searching for flights, trains, and buses, finding restaurants and hotels, and providing navigation based on your device's location. Rest assured that I'm committed to becoming your ultimate virtual companion in the A.D.A program. Stay tuned for further updates and enhancements as I strive to make your daily tasks easier and more convenient. Together, we'll achieve great things!" 
+
+            return response
         else:
             return "Sorry, I couldn't understand your command."
 
