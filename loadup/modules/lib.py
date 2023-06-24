@@ -14,7 +14,7 @@ class CommandWeb:
 
     def execute_command(self):
         if re.search(r'\bplay\b', self.command, re.IGNORECASE):
-            song = re.sub(r"\b(play|song)\b", self.command, flags=re.IGNORECASE)
+            song = re.sub(r"\b(play|song)\b","playing", self.command, flags=re.IGNORECASE)
             print(song)
             pywhatkit.playonyt(song)
             return song
